@@ -29,6 +29,14 @@ module WebDriverManager
       end
     end
 
+    def output=(io)
+      if @logger.respond_to?(:reopen)
+        @logger.reopen(io)
+      else
+        @logger = create_logger(io)
+      end
+    end
+
     private
 
     def create_logger(output)

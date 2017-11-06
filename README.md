@@ -20,7 +20,26 @@ You can also install WebDriver Manager just as you would any other gem:
 
 ## Usage
 
-Instructions coming soon.
+### Logging
+
+You can enable logging with WebDriver Manager with a command like this:
+
+```ruby
+WebDriverManager.logger.level = :debug
+```
+
+There are debug statements in the code base that will show you what's happening as WebDriver Manager operates. But you are free to add your own messages as well. For example, you could set the logging level to `info` and then add your own messages:
+
+```ruby
+WebDriverManager.logger.level = :info
+WebDriverManager.logger.info("Some Information")
+```
+
+You can also set the logging output to a file:
+
+```ruby
+WebDriverManager.logger.output = 'webdriver_manager.log'
+```
 
 ## Development
 

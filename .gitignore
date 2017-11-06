@@ -17,6 +17,7 @@
 *.swp
 *.bak
 .rspec_status
+webdriver_manager.log
 
 # IDE-Specific
 
