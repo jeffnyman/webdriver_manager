@@ -1,7 +1,24 @@
 module WebDriverManager
   module Support
     def provision
+      remove_binary
+      puts driver_binary_list
       puts driver_binary
+    end
+
+    def remove_binary
+      WebDriverManager.logger.debug("Deleting #{driver_binary}")
+      FileUtils.rm_f(driver_binary)
+    end
+
+    protected
+
+    def get(url)
+      response = Net::HTTP.get_response(URI(url))
+
+      case response
+        when Net::HTTPSuccess then response.body
+      end
     end
 
     private

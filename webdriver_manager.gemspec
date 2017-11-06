@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
 
   spec.add_runtime_dependency "selenium-webdriver", "~> 3.0"
+  spec.add_runtime_dependency "nokogiri", "~> 1.8"
 
   spec.post_install_message = %{
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
