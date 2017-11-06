@@ -5,6 +5,7 @@ module WebDriverManager
       puts driver_binary_list
       puts latest_binary
       puts driver_is_downloaded?
+      puts driver_download_url(nil)
       puts driver_binary
     end
 
@@ -44,6 +45,10 @@ module WebDriverManager
       result = File.exist?(driver_binary)
       WebDriverManager.logger.debug("Driver Already Downloaded: #{result}")
       result
+    end
+
+    def driver_download_url(version)
+      driver_binary_list[version || latest_binary]
     end
 
     # This method gets the full driver binary, by getting the driver
