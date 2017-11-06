@@ -28,6 +28,17 @@ module WebDriverManager
 
     private
 
+    def driver_url_is_reachable?
+      get(driver_base_url)
+      WebDriverManager.logger.debug("Driver URL Available: #{driver_base_url}")
+      true
+    rescue StandardError
+      WebDriverManager.logger.debug(
+        "Driver URL Not Available: #{driver_base_url}"
+      )
+      false
+    end
+
     # This method gets the full driver binary, by getting the driver
     # repository, which it determines from this module, coupled with the
     # name of the driver, which is gathered from the driver-specific class.

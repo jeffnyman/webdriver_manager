@@ -14,6 +14,10 @@ module WebDriverManager
       end
 
       def driver_binary_list
+        unless driver_url_is_reachable?
+          raise StandardError, "Unable to Access the Driver URL"
+        end
+
         @binaries ||= begin
           files = process_binary_files
           process_binary_versions(files)
@@ -33,7 +37,7 @@ module WebDriverManager
         end
 
         WebDriverManager.logger.debug(
-          "Versions now located at driver URL: #{binary_list.keys}"
+          "Versions Located at Driver URL: #{binary_list.keys}"
         )
 
         binary_list
