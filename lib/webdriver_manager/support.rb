@@ -3,12 +3,17 @@ module WebDriverManager
     def provision
       remove_binary
       puts driver_binary_list
+      puts latest_binary
       puts driver_binary
     end
 
     def remove_binary
       WebDriverManager.logger.debug("Deleting #{driver_binary}")
       FileUtils.rm_f(driver_binary)
+    end
+
+    def latest_binary
+      driver_binary_list.keys.sort.last
     end
 
     protected
