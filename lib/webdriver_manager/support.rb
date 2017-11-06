@@ -4,6 +4,7 @@ module WebDriverManager
       remove_binary
       puts driver_binary_list
       puts latest_binary
+      puts driver_is_downloaded?
       puts driver_binary
     end
 
@@ -37,6 +38,12 @@ module WebDriverManager
         "Driver URL Not Available: #{driver_base_url}"
       )
       false
+    end
+
+    def driver_is_downloaded?
+      result = File.exist?(driver_binary)
+      WebDriverManager.logger.debug("Driver Already Downloaded: #{result}")
+      result
     end
 
     # This method gets the full driver binary, by getting the driver
