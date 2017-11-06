@@ -6,7 +6,9 @@ require "webdriver_manager/drivers/driver_chrome"
 module Selenium
   module WebDriver
     module Chrome
-      @driver_path ||= WebDriverManager::ChromeDriver.provision
+      def self.driver_path
+        @driver_path ||= WebDriverManager::ChromeDriver.provision
+      end
     end
   end
 end
