@@ -41,6 +41,10 @@ You can also set the logging output to a file:
 WebDriverManager.logger.output = 'webdriver_manager.log'
 ```
 
+### How It Works
+
+WebDriver Manager works by providing an additional implementation to the `@driver_path` variable that Selenium uses when establishing an instance of a driver. For example, the [Chrome](https://github.com/SeleniumHQ/selenium/blob/master/rb/lib/selenium/webdriver/chrome.rb) implementation simply takes in a path for the driver. This gem overrides that with its own specific functionality for providing a standard path and making sure the relevant binaries are on that path and downloading them if not.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec:all` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment. To install this gem onto your local machine, run `bundle exec rake install`.
