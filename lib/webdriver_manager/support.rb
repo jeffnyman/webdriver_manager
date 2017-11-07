@@ -10,15 +10,9 @@ module WebDriverManager
 
       return driver_binary if current_binary == latest_binary
 
-      remove_binary && provision_driver
+      puts "* driver_binary: #{driver_binary}"
 
-      # remove_binary
-      # puts driver_binary_list
-      # puts latest_binary
-      # puts driver_is_downloaded?
-      # puts driver_download_url(nil)
-      # puts driver_binary
-      # provision_driver
+      remove_binary && provision_driver
     end
 
     def provision_driver(version = nil)
