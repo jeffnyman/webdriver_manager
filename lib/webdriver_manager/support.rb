@@ -5,12 +5,7 @@ module WebDriverManager
         return current_binary.nil? ? nil : driver_binary
       end
 
-      puts "* current_binary: #{current_binary}"
-      puts "* latest_binary: #{latest_binary}"
-
       return driver_binary if current_binary == latest_binary
-
-      puts "* driver_binary: #{driver_binary}"
 
       remove_binary && provision_driver
     end
