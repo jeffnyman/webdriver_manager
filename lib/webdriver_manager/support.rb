@@ -2,11 +2,21 @@ module WebDriverManager
   module Support
     def provision
       remove_binary
-      puts driver_binary_list
-      puts latest_binary
-      puts driver_is_downloaded?
-      puts driver_download_url(nil)
-      puts driver_binary
+      # puts driver_binary_list
+      # puts latest_binary
+      # puts driver_is_downloaded?
+      # puts driver_download_url(nil)
+      # puts driver_binary
+      provision_driver
+    end
+
+    def provision_driver(version = nil)
+      url, filename = driver_filename(version)
+      Dir.mkdir(driver_repo) unless File.exist?(driver_repo)
+
+      Dir.chdir(driver_repo) do
+        download_driver(filename, url)
+      end
     end
 
     def remove_binary
@@ -29,6 +39,25 @@ module WebDriverManager
     end
 
     private
+
+    def download_driver(filename, url)
+      FileUtils.rm_f(filename)
+
+      open(filename, "wb") do |file|
+        file.print(get(url))
+      end
+
+      raise "Unable to download #{url}" unless File.exist?(filename)
+      WebDriverManager.logger.debug("Successfully downloaded #{filename}")
+    end
+
+    def driver_filename(version)
+      # URL: http://chromedriver.storage.googleapis.com/2.33/chromedriver_mac64.zip
+      # Filename: chromedriver_mac64.zip
+      url = driver_download_url(version)
+      filename = File.basename(url)
+      [url, filename]
+    end
 
     def driver_url_is_reachable?
       get(driver_base_url)
