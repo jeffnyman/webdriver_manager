@@ -64,4 +64,4 @@ Metrics/ParameterLists:
 # Additions for WebDriver Manager
 
 Metrics/ModuleLength:
-  Max: 110
+  Max: 120

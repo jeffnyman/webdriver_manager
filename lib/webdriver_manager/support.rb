@@ -1,13 +1,24 @@
 module WebDriverManager
   module Support
     def provision
-      remove_binary
+      unless driver_url_is_reachable?
+        return current_binary.nil? ? nil : driver_binary
+      end
+
+      puts "* current_binary: #{current_binary}"
+      puts "* latest_binary: #{latest_binary}"
+
+      return driver_binary if current_binary == latest_binary
+
+      remove_binary && provision_driver
+
+      # remove_binary
       # puts driver_binary_list
       # puts latest_binary
       # puts driver_is_downloaded?
       # puts driver_download_url(nil)
       # puts driver_binary
-      provision_driver
+      # provision_driver
     end
 
     def provision_driver(version = nil)

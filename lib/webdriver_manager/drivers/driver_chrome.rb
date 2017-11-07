@@ -5,6 +5,16 @@ module WebDriverManager
     extend Support
 
     class << self
+      def current_binary
+        WebDriverManager.logger.debug("Checking Current Driver Version")
+        return nil unless driver_is_downloaded?
+        binary_version = `#{driver_binary} --version`
+        WebDriverManager.logger.debug(
+          "Current version of #{driver_binary} is #{binary_version}"
+        )
+        normalize(binary_version.match(/ChromeDriver (\d\.\d+)/)[1])
+      end
+
       def driver_name
         os_platform == "win" ? "chromedriver.exe" : "chromedriver"
       end
