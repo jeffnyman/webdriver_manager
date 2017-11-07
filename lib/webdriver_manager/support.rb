@@ -19,6 +19,7 @@ module WebDriverManager
         decompress_driver(filename)
       end
 
+      set_driver_permissions
       driver_binary
     end
 
@@ -93,6 +94,13 @@ module WebDriverManager
         end
       end
       @top_path
+    end
+
+    def set_driver_permissions
+      FileUtils.chmod("ugo+rx", driver_binary)
+      WebDriverManager.logger.debug(
+        "Completed download and processing of #{driver_binary}"
+      )
     end
 
     def driver_filename(version)
