@@ -16,7 +16,10 @@ module WebDriverManager
 
       Dir.chdir(driver_repo) do
         download_driver(filename, url)
+        decompress_driver(filename)
       end
+
+      driver_binary
     end
 
     def remove_binary
@@ -51,9 +54,51 @@ module WebDriverManager
       WebDriverManager.logger.debug("Successfully downloaded #{filename}")
     end
 
+    def decompress_driver(filename)
+      dcf = decompress_file(filename)
+      WebDriverManager.logger.debug("Decompression Complete")
+
+      if dcf
+        WebDriverManager.logger.debug("Deleting #{filename}")
+        FileUtils.rm_f(filename)
+      end
+
+      return if File.exist?(driver_binary)
+      raise "Unable to decompress #{filename} to get #{driver_binary}"
+    end
+
+    def decompress_file(filename)
+      case filename
+        when /\.zip$/
+          WebDriverManager.logger.debug("Decompressing zip")
+          unzip_file(filename)
+      end
+    end
+
+    def unzip_file(filename)
+      require "zip"
+      Zip::File.open("#{Dir.pwd}/#{filename}") do |zip_file|
+        zip_file.each do |f|
+          # @top_path: chromedriver
+          # f_path: /Users/jnyman/.webdrivers/chromedriver
+          @top_path ||= f.name
+          f_path = File.join(Dir.pwd, f.name)
+
+          # Need to clear out name of program ("chromedriver") so that the
+          # unzipping process can take place without having to deal with
+          # overwriting a file.
+          remove_binary
+
+          zip_file.extract(f, f_path)
+        end
+      end
+      @top_path
+    end
+
     def driver_filename(version)
-      # URL: http://chromedriver.storage.googleapis.com/2.33/chromedriver_mac64.zip
-      # Filename: chromedriver_mac64.zip
+      # Here the `url` will be something like this:
+      # http://chromedriver.storage.googleapis.com/2.33/chromedriver_mac64.zip
+      # The `filename` here will simply be: chromedriver_mac64.zip
       url = driver_download_url(version)
       filename = File.basename(url)
       [url, filename]

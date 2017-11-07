@@ -60,3 +60,8 @@ Metrics/MethodLength:
 # Encourage fewer parameters.
 Metrics/ParameterLists:
   Max: 4
+
+# Additions for WebDriver Manager
+
+Metrics/ModuleLength:
+  Max: 110
