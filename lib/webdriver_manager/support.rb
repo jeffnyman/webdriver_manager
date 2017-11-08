@@ -39,6 +39,10 @@ module WebDriverManager
 
       case response
         when Net::HTTPSuccess then response.body
+        when Net::HTTPRedirection
+          location = response['location']
+          WebDriverManager.logger.debug("Redirected to #{location}")
+          get(location)
       end
     end
 
@@ -70,6 +74,9 @@ module WebDriverManager
 
     def decompress_file(filename)
       case filename
+        when /tar\.gz$/
+          WebDriverManager.logger.debug("Decompressing tar")
+          untargz_file(filename)
         when /\.zip$/
           WebDriverManager.logger.debug("Decompressing zip")
           unzip_file(filename)
@@ -80,20 +87,24 @@ module WebDriverManager
       require "zip"
       Zip::File.open("#{Dir.pwd}/#{filename}") do |zip_file|
         zip_file.each do |f|
-          # @top_path: chromedriver
-          # f_path: /Users/jnyman/.webdrivers/chromedriver
           @top_path ||= f.name
           f_path = File.join(Dir.pwd, f.name)
 
-          # Need to clear out name of program ("chromedriver") so that the
-          # unzipping process can take place without having to deal with
-          # overwriting a file.
           remove_binary
 
           zip_file.extract(f, f_path)
         end
       end
       @top_path
+    end
+
+    def untargz_file(filename)
+      require "rubygems/package"
+      tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.open(filename))
+      file = File.open(driver_name, "w+b")
+      tar_extract.each { |entry| file << entry.read }
+      file.close
+      File.basename(file)
     end
 
     def set_driver_permissions
@@ -104,9 +115,6 @@ module WebDriverManager
     end
 
     def driver_filename(version)
-      # Here the `url` will be something like this:
-      # http://chromedriver.storage.googleapis.com/2.33/chromedriver_mac64.zip
-      # The `filename` here will simply be: chromedriver_mac64.zip
       url = driver_download_url(version)
       filename = File.basename(url)
       [url, filename]
@@ -133,9 +141,6 @@ module WebDriverManager
       driver_binary_list[version || latest_binary]
     end
 
-    # This method gets the full driver binary, by getting the driver
-    # repository, which it determines from this module, coupled with the
-    # name of the driver, which is gathered from the driver-specific class.
     def driver_binary
       File.join(driver_repo, driver_name)
     end

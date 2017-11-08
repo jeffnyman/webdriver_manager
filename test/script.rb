@@ -5,4 +5,6 @@ WebDriverManager.logger.level = :debug
 
 require "watir"
 
-Watir::Browser.new
+browser = Watir::Browser.new :firefox
+
+browser.quit()
