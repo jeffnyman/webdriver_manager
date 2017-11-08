@@ -1,5 +1,10 @@
 # WebDriver Manager
 
+[![Gem Version](https://badge.fury.io/rb/webdriver_manager.svg)](http://badge.fury.io/rb/webdriver_manager)
+[![License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/jeffnyman/webdriver_manager/blob/master/LICENSE.txt)
+
+[![Dependency Status](https://gemnasium.com/jeffnyman/webdriver_manager.png)](https://gemnasium.com/jeffnyman/webdriver_manager)
+
 The goal of WebDriver Manager is to allow automated testing solutions an ability to have WebDriver binary drivers downloaded automatically.
 
 ## Installation
@@ -19,6 +24,27 @@ You can also install WebDriver Manager just as you would any other gem:
     $ gem install webdriver_manager
 
 ## Usage
+
+### Basic Usage
+
+Here is an example script:
+
+```ruby
+require "webdriver_manager"
+require "watir"
+
+browser = Watir::Browser.new :firefox
+
+browser.quit()
+```
+
+All you have to do is include `webdriver_manager`. Once it's included, the gem provides hooks into the operation of Selenium WebDriver. When Watir, in this case, is used to instantiate a new Firefox browser, this gem kicks in and makes sure that `geckodriver` (or `geckodriver.exe` on Windows) is available. If the driver binary is not available, it will be downloaded for you.
+
+All driver binaries are placed in a `.webdrivers` directory within the relevant directory referred to by the `HOME` environment variable for your operating system.
+
+### Browser Drivers Supported
+
+Currently WebDriver Manager supports only Chrome (chromedriver) and Firefox (geckodriver). I will be adding support for other browsers, such as Internet Explorer and Microsoft Edge, once I'm certain I have a fully reliable means of getting the drivers.
 
 ### Logging
 
