@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "selenium-webdriver", "~> 3.0"
   spec.add_runtime_dependency "nokogiri", "~> 1.8"
+  spec.add_runtime_dependency "rubyzip", "~> 1.0"
 
   spec.post_install_message = %{
 (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::) (::)
