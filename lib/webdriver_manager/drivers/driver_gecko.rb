@@ -36,7 +36,7 @@ module WebDriverManager
 
       def process_binary_files
         resource = Nokogiri::XML.parse(get(driver_base_url))
-        files = resource.css(".release-downloads a")
+        files = resource.css(".py-2 a")
                         .collect { |file| file["href"] }
         files.reject! { |file| file.include?('archive') }
         files.select! { |file| file.include?(os_platform) }
