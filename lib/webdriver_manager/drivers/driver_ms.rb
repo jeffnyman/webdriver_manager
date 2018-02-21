@@ -55,7 +55,7 @@ module WebDriverManager
             url = "https://download.microsoft.com/download/1/4/1/#{build}"
         end
 
-        binary_list[current_binary] = url
+        @binaries = {current_binary => url}
       end
     end
   end
