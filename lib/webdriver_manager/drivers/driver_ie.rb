@@ -26,7 +26,7 @@ module WebDriverManager
       end
 
       def driver_base_url
-        "http://selenium-release.storage.googleapis.com/"
+        "http://selenium-release.storage.googleapis.com"
       end
 
       def driver_binary_list
