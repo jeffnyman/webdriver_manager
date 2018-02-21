@@ -17,8 +17,7 @@ module WebDriverManager
       end
 
       def driver_base_url
-        # https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads
-        "https://www.microsoft.com/en-us/download"
+        "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads"
       end
 
       def driver_binary_list
@@ -55,7 +54,7 @@ module WebDriverManager
             url = "https://download.microsoft.com/download/1/4/1/#{build}"
         end
 
-        @binaries = {current_binary => url}
+        @binaries = {current_binary.to_i => url}
       end
     end
   end

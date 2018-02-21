@@ -44,9 +44,7 @@ All driver binaries are placed in a `.webdrivers` directory within the relevant 
 
 ### Browser Drivers Supported
 
-Currently WebDriver Manager supports only Chrome (chromedriver) and Firefox (geckodriver). I will be adding support for other browsers, such as Internet Explorer and Microsoft Edge, once I'm certain I have a fully reliable means of getting the drivers.
-
-I do have mechanisms in place to support IE and Edge but they work sporadically, at best.
+Currently WebDriver Manager supports Chrome (chromedriver), Firefox (geckodriver), Internet Explorer (IEDriverServer), and Edge (MicrosoftWebDriver). The support for Internet Explorer and Edge is a bit of a work in progress but, overall, they should work in terms of getting the appropriate driver.
 
 ### Logging
 
