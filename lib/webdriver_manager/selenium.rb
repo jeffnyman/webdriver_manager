@@ -17,5 +17,17 @@ module Selenium
         @driver_path ||= WebDriverManager::GeckoDriver.provision
       end
     end
+
+    module IE
+      def self.driver_path
+        @driver_path ||= WebDriverManager::IEDriver.provision
+      end
+    end
+
+    module Edge
+      def self.driver_path
+        @driver_path ||= WebDriverManager::MSDriver.provision
+      end
+    end
   end
 end
