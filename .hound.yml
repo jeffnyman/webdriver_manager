@@ -70,7 +70,7 @@ Style/NumericLiterals:
   Enabled: False
 
 Metrics/LineLength:
-  Max: 82
+  Max: 90
 
 # Currently only for the MSDriver. Will refactor
 # to remove the need for this.
