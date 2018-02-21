@@ -65,3 +65,17 @@ Metrics/ParameterLists:
 
 Metrics/ModuleLength:
   Max: 135
+
+Style/NumericLiterals:
+  Enabled: False
+
+Metrics/LineLength:
+  Max: 82
+
+# Currently only for the MSDriver. Will refactor
+# to remove the need for this.
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/AbcSize:
+  Max: 17
