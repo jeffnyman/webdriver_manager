@@ -3,6 +3,8 @@ require "selenium-webdriver"
 require "webdriver_manager/support"
 require "webdriver_manager/drivers/driver_chrome"
 require "webdriver_manager/drivers/driver_gecko"
+require "webdriver_manager/drivers/driver_ie"
+require "webdriver_manager/drivers/driver_ms"
 
 module Selenium
   module WebDriver
