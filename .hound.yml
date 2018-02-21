@@ -75,7 +75,13 @@ Metrics/LineLength:
 # Currently only for the MSDriver. Will refactor
 # to remove the need for this.
 Metrics/MethodLength:
-  Max: 30
+  Max: 32
 
 Metrics/AbcSize:
-  Max: 17
+  Max: 24
+
+Metrics/CyclomaticComplexity:
+  Max: 8
+
+Style/CommandLiteral:
+  Enabled: False

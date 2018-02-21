@@ -13,7 +13,7 @@ module WebDriverManager
           "Current version of #{driver_binary} is #{binary_version}"
         )
         normalize(
-          binary_string.match(/IEDriverServer.exe (\d\.\d+\.\d*\.\d*)/)[1]
+          binary_version.match(/IEDriverServer.exe (\d\.\d+\.\d*\.\d*)/)[1]
         )
       end
 
