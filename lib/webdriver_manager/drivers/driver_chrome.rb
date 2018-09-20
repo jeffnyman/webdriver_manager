@@ -12,7 +12,7 @@ module WebDriverManager
         WebDriverManager.logger.debug(
           "Current version of #{driver_binary} is #{binary_version}"
         )
-        normalize(binary_version.match(/ChromeDriver (\d\.\d+)/)[1])
+        normalize(binary_version.match(/ChromeDriver (\d+\.\d+)/)[1])
       end
 
       def driver_name
