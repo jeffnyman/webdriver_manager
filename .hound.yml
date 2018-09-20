@@ -85,3 +85,9 @@ Metrics/CyclomaticComplexity:
 
 Style/CommandLiteral:
   Enabled: False
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Security/Open:
+  Enabled: false

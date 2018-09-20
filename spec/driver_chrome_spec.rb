@@ -4,7 +4,7 @@ RSpec.describe WebDriverManager::ChromeDriver do
   context "when online" do
     it "will find the latest version" do
       expect(chromedriver.latest_binary).to be > 2.30
-      expect(chromedriver.latest_binary).to be < 2.9
+      expect(chromedriver.latest_binary).to be < 80.0
     end
 
     it "will normalize chromedriver versions before 2.10" do

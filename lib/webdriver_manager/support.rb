@@ -29,7 +29,7 @@ module WebDriverManager
     end
 
     def latest_binary
-      driver_binary_list.keys.sort.last
+      driver_binary_list.keys.max
     end
 
     protected
